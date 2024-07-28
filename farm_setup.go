@@ -49,3 +49,10 @@ func (colony *Farm) SetupAnts(antCount int) {
 			colony.workers[i].antNumber = i + 1
 	}
 }
+
+// SetupPaths initializes the shortest path to each room as infinity
+func (colony *Farm) SetupPaths() {
+	for index := range colony.roomMap {
+			colony.roomPaths[colony.roomMap[index]] = math.MaxInt32
+	}
+}

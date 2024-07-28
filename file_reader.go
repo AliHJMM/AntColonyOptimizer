@@ -27,6 +27,31 @@ func ReadAndParseFile(inputPath string, colony *Farm) (bool, string) {
  endRoomSet := false
 
  for fileScanner.Scan() {
+	line := fileScanner.Text()
+	inputInfo += line + "\n"
+	lineIndex++
 
+	// Handle comments and special commands
+	if strings.HasPrefix(line, "#") {
+		if line == "##start" {
+			if startRoomSet {
+				fmt.Printf("ERROR: invalid data format, multiple start rooms defined (%s)\n", line)
+				os.Exit(1)
+			}
+			startRoomSet = true
+			isBeginningRoom = true
+			continue
+		} else if line == "##end" {
+			if endRoomSet {
+				fmt.Printf("ERROR: invalid data format, multiple end rooms defined (%s)\n", line)
+				os.Exit(1)
+			}
+			endRoomSet = true
+			isFinalRoom = true
+			continue
+		} else {
+			continue
+		}
+	}
  }
 }

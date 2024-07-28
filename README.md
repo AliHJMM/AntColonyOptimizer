@@ -11,3 +11,10 @@
 - [Habib Mansoor](https://github.com/7abib04)
 - [Husain Ali](https://github.com/hujaafar)
 - [Mohamed-Alasfoor](https://github.com/Mohamed-Alasfoor)
+
+## Usage
+
+### How to Run
+1. git clone URL or download zip file
+2. naviagte to root directory
+3. go run main.go testFiles/filename.txt

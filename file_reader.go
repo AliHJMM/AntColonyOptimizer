@@ -7,3 +7,7 @@ import (
 	"strconv"
 	"strings"
 )
+
+func ReadAndParseFile(inputPath string, colony *Farm) (bool, string) {
+
+}

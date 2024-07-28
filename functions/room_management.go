@@ -10,16 +10,16 @@ func (farm *Farm) CountTunnels(chamber *AntRoom) int {
 
 	// Iterate through all connected rooms
 	for connection != nil {
-		// If the connected room is closer to the destination, increment the count
-		if farm.roomPaths[connection.data] < farm.roomPaths[chamber] {
-				tunnelCount++
-		}
-		// Move to the next connection
-		connection = connection.nextConnection
-}
+			// If the connected room is closer to the destination, increment the count
+			if farm.roomPaths[connection.data] < farm.roomPaths[chamber] {
+					tunnelCount++
+			}
+			// Move to the next connection
+			connection = connection.nextConnection
+	}
 
-// Return the total count of tunnels leading to closer rooms
-return tunnelCount
+	// Return the total count of tunnels leading to closer rooms
+	return tunnelCount
 }
 
 // Connection represents a link between rooms
@@ -40,9 +40,10 @@ func (list *RoomCollection) AddRoom(roomToAdd *AntRoom) {
 
 	// If the list is empty, make this the first node
 	if list.firstNode == nil {
-		list.firstNode = nodeToAdd
-		return
-}
+			list.firstNode = nodeToAdd
+			return
+	}
+
 	// Otherwise, find the last node in the list
 	currentNode := list.firstNode
 	for currentNode.nextConnection != nil {
@@ -52,3 +53,4 @@ func (list *RoomCollection) AddRoom(roomToAdd *AntRoom) {
 	// Add the new node to the end of the list
 	currentNode.nextConnection = nodeToAdd
 }
+

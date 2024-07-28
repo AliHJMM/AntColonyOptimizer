@@ -10,3 +10,16 @@ type ColonyWorker struct {
 	inMotion         bool           // Indicates if the ant is currently moving
 	hasCompletedMove bool           // Indicates if the ant has finished its move
 }
+
+// AntRoom represents a room in the ant colony
+type AntRoom struct {
+	connectedRooms *RoomCollection  // Rooms connected to this room
+	isBeginning    bool             // True if this is the starting room
+	isDestination  bool             // True if this is the destination room
+	isUnoccupied   bool             // True if the room is currently empty
+	xCoordinate    int              // X-coordinate of the room
+	yCoordinate    int              // Y-coordinate of the room
+	roomName       string           // Name of the room
+	accessibility  map[string]bool  // Indicates which tunnels are accessible
+	isEndpoint     bool             // True if this room is an endpoint
+}

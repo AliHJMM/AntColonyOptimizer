@@ -132,5 +132,10 @@ if !startRoomSet || !endRoomSet {
 	fmt.Println("ERROR: invalid data format, no start/end room found")
 	os.Exit(1)
 }
+  // Setup ants and return
+  colony.SetupAnts(AntsCount)
+  inputInfo += "\n"
+  return true, inputInfo
+}
  }
 }

@@ -11,3 +11,16 @@ func (colony *Farm) RegisterRoom(roomName string, roomType string, xCoord int, y
 		fmt.Printf("ERROR: invalid data format, duplicate room name '%s'\n", roomName)
 		os.Exit(1) // Exit the program with an error code
 	}
+	switch roomType {
+	case "start":
+		colony.roomMap[roomName] = &AntRoom{
+			roomName:       roomName,
+			isBeginning:    true,
+			isDestination:  false,
+			isUnoccupied:   true,
+			xCoordinate:    xCoord,
+			yCoordinate:    yCoord,
+			connectedRooms: &RoomCollection{},
+			accessibility:  make(map[string]bool),
+		}
+		colony.initialRoom = colony.roomMap[roomName]

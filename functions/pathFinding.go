@@ -53,3 +53,13 @@ func (farm *Farm) FindShortestPath() {
         printAndExit("⛔ Initial Room Not Explored⛔", 0)
     }
 }
+
+// AreAllAntsAtFinalRoom checks if all ants have reached the final room
+func (colony *Farm) AreAllAntsAtFinalRoom() bool {
+    for _, worker := range colony.workers {
+        if worker.currentRoom != colony.finalRoom {
+            return false
+        }
+    }
+    return true
+}

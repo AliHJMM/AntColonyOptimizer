@@ -48,3 +48,8 @@ func (farm *Farm) FindShortestPath() {
         exploredRooms[current] = true
         current = stack.RemoveRoom()
     }
+	  // Check if initial room was explored
+	  if !exploredRooms[farm.initialRoom] {
+        printAndExit("⛔ Initial Room Not Explored⛔", 0)
+    }
+}

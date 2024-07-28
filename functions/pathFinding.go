@@ -156,3 +156,14 @@ func (colony *Farm) DetermineNextRoom(ant *ColonyWorker, isStrict bool) *AntRoom
     }
     return bestRoom
 }
+// canMoveToRoom checks if an ant can move to a specific room
+func canMoveToRoom(ant *ColonyWorker, destinationRoom *AntRoom) bool {
+    return (destinationRoom.isUnoccupied || destinationRoom.isDestination) &&
+           !ant.visitedRoom[destinationRoom] &&
+           !destinationRoom.isBeginning &&
+           !ant.currentRoom.accessibility[destinationRoom.roomName] &&
+           ant.inMotion &&
+           !destinationRoom.isEndpoint &&
+           !ant.hasCompletedMove
+}
+

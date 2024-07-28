@@ -102,3 +102,14 @@ func (colony *Farm) AdvanceAntsInFarm(toggle bool) {
 	colony.ResetTunnelAccess()
     colony.FindShortestPath()
 }
+
+// FindOptimalAntPath finds the optimal path for ants to reach the final room
+func (colony *Farm) FindOptimalAntPath() {
+    onSteps, offSteps, onPath, offPath, currentStep := 0, 0, "", "", 0
+
+    // First attempt without optimization
+    for !colony.AreAllAntsAtFinalRoom() {
+        offSteps++
+        colony.AdvanceAntsInFarm(false)
+        offPath += colony.FormatAntLocations()
+    }

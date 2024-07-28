@@ -113,3 +113,24 @@ func (colony *Farm) FindOptimalAntPath() {
         colony.AdvanceAntsInFarm(false)
         offPath += colony.FormatAntLocations()
     }
+	 // Second attempt with optimization
+	 colony.RepositionAnts()
+	 for !colony.AreAllAntsAtFinalRoom() {
+		 currentStep++
+		 onSteps++
+		 if onSteps > offSteps {
+			 break
+		 }
+		 colony.AdvanceAntsInFarm(true)
+		 onPath += colony.FormatAntLocations()
+	 }
+ 
+	 // Compare results and print the optimal path
+	 if offSteps == onSteps {
+		 fmt.Printf("\n%s\nSteps taken: %d\n", onPath, onSteps)
+	 } else if offSteps < onSteps {
+		 fmt.Printf("\n%s\nSteps taken: %d\n", offPath, offSteps)
+	 } else {
+		 fmt.Printf("\n%s\nSteps taken: %d\n", onPath, onSteps)
+	 }
+ }

@@ -32,3 +32,8 @@ type Connection struct {
 type RoomCollection struct {
 	firstNode *Connection // The first room in the collection
 }
+
+// AddRoom adds a new room to the collection
+func (list *RoomCollection) AddRoom(roomToAdd *AntRoom) {
+	// Create a new connection node for the room
+	nodeToAdd := &Connection{data: roomToAdd, nextConnection: nil}

@@ -93,3 +93,9 @@ func (colony *Farm) AdvanceAntsInFarm(toggle bool) {
             activeWorkers[workerIndex].hasCompletedMove = true
             movementOccurred = true
         }
+		 // Reset worker index if movement occurred and we're at the last worker
+		 if workerIndex == len(activeWorkers)-1 && movementOccurred {
+            workerIndex = 0
+            movementOccurred = false
+        }
+    }

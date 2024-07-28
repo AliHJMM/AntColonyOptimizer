@@ -26,3 +26,25 @@ func (farm *Farm) FindShortestPath() {
     current := stack.RemoveRoom()
     farm.roomPaths[current] = 1
     seenRooms[current] = true
+
+	 // Breadth-first search
+	 for current != nil {
+        neighborNode := current.connectedRooms.firstNode
+        for neighborNode != nil {
+            if !seenRooms[neighborNode.data] {
+                if !neighborNode.data.isBeginning {
+                    stack.AddRoomToStack(neighborNode.data)
+                }
+                seenRooms[neighborNode.data] = true
+                if farm.roomPaths[current]+1 < farm.roomPaths[neighborNode.data] {
+                    farm.roomPaths[neighborNode.data] = farm.roomPaths[current] + 1
+                }
+            }
+            if neighborNode.data == farm.initialRoom {
+                exploredRooms[neighborNode.data] = true
+            }
+            neighborNode = neighborNode.nextConnection
+        }
+        exploredRooms[current] = true
+        current = stack.RemoveRoom()
+    }

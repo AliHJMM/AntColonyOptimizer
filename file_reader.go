@@ -104,5 +104,13 @@ func ReadAndParseFile(inputPath string, colony *Farm) (bool, string) {
 		colony.RegisterRoom(room, "end", xCoordinate, yCoordinate)
 		continue
 	}
+	 // Handle room connections
+	 if strings.Contains(line, "-") && strings.Count(line, "-") == 1 {
+		parameters := strings.Split(line, "-")
+		if !colony.linkRooms(parameters[0], parameters[1], true) {
+			os.Exit(1)
+		}
+		continue
+	}
  }
 }

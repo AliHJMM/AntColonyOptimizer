@@ -33,3 +33,8 @@ func (colony *Farm) ResetTunnelAccess() {
 	}
 }
 
+// RoomStack is a simple stack data structure for rooms
+type RoomStack struct {
+	roomList []*AntRoom
+}
+

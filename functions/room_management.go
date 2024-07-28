@@ -43,3 +43,12 @@ func (list *RoomCollection) AddRoom(roomToAdd *AntRoom) {
 		list.firstNode = nodeToAdd
 		return
 }
+	// Otherwise, find the last node in the list
+	currentNode := list.firstNode
+	for currentNode.nextConnection != nil {
+			currentNode = currentNode.nextConnection
+	}
+
+	// Add the new node to the end of the list
+	currentNode.nextConnection = nodeToAdd
+}

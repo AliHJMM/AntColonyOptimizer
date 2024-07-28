@@ -63,3 +63,13 @@ func (colony *Farm) AreAllAntsAtFinalRoom() bool {
     }
     return true
 }
+
+// AdvanceAntsInFarm moves ants through the farm
+func (colony *Farm) AdvanceAntsInFarm(toggle bool) {
+    activeWorkers := make([]*ColonyWorker, colony.antCount)
+    copy(activeWorkers, colony.workers)
+
+    // Sort workers based on the number of tunnels in their current room
+    sort.SliceStable(activeWorkers, func(workerIdx1, workerIdx2 int) bool {
+        return colony.CountTunnels(activeWorkers[workerIdx1].currentRoom) < colony.CountTunnels(activeWorkers[workerIdx2].currentRoom)
+    })

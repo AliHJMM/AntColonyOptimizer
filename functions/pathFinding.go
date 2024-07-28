@@ -99,3 +99,6 @@ func (colony *Farm) AdvanceAntsInFarm(toggle bool) {
             movementOccurred = false
         }
     }
+	colony.ResetTunnelAccess()
+    colony.FindShortestPath()
+}

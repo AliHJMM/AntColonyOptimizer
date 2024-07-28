@@ -25,4 +25,8 @@ func ReadAndParseFile(inputPath string, colony *Farm) (bool, string) {
  AntsCount := 0
  startRoomSet := false
  endRoomSet := false
+
+ for fileScanner.Scan() {
+
+ }
 }

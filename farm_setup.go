@@ -23,3 +23,13 @@ type AntRoom struct {
 	accessibility  map[string]bool  // Indicates which tunnels are accessible
 	isEndpoint     bool             // True if this room is an endpoint
 }
+
+// Farm represents the entire ant colony
+type Farm struct {
+	roomMap     map[string]*AntRoom // Map of all rooms in the colony
+	antCount    int                 // Total number of ants
+	roomPaths   map[*AntRoom]int    // Stores the shortest path to each room
+	workers     []*ColonyWorker     // Slice of all ants in the colony
+	initialRoom *AntRoom            // Starting room for the ants
+	finalRoom   *AntRoom            // Destination room for the ants
+}

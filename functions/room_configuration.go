@@ -11,6 +11,7 @@ func (colony *Farm) RegisterRoom(roomName string, roomType string, xCoord int, y
 		fmt.Printf("ERROR: invalid data format, duplicate room name '%s'\n", roomName)
 		os.Exit(1) // Exit the program with an error code
 	}
+
 	switch roomType {
 	case "start":
 		colony.roomMap[roomName] = &AntRoom{
@@ -56,6 +57,8 @@ func (colony *Farm) RegisterRoom(roomName string, roomType string, xCoord int, y
 	}
 }
 
+
+
 // linkRooms links two rooms and handles invalid room names and duplicate connections.
 func (colony *Farm) linkRooms(fromRoomName string, toRoomName string, isBidirectional bool) bool {
     fromRoom := colony.roomMap[fromRoomName]
@@ -66,8 +69,9 @@ func (colony *Farm) linkRooms(fromRoomName string, toRoomName string, isBidirect
         fmt.Println("ERROR: invalid data format, invalid room definition")
         return false
     }
-	 // Check for duplicate connection
-	 if fromRoom.HasTunnelTo(toRoom) {
+
+    // Check for duplicate connection
+    if fromRoom.HasTunnelTo(toRoom) {
         fmt.Printf("ERROR: duplicate connection between rooms '%s' and '%s'\n", fromRoomName, toRoomName)
         return false
     }

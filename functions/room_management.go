@@ -37,3 +37,9 @@ type RoomCollection struct {
 func (list *RoomCollection) AddRoom(roomToAdd *AntRoom) {
 	// Create a new connection node for the room
 	nodeToAdd := &Connection{data: roomToAdd, nextConnection: nil}
+
+	// If the list is empty, make this the first node
+	if list.firstNode == nil {
+		list.firstNode = nodeToAdd
+		return
+}

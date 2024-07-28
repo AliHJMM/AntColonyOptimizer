@@ -21,3 +21,9 @@ func (farm *Farm) CountTunnels(chamber *AntRoom) int {
 // Return the total count of tunnels leading to closer rooms
 return tunnelCount
 }
+
+// Connection represents a link between rooms
+type Connection struct {
+	data           *AntRoom    // The room this connection leads to
+	nextConnection *Connection // The next connection in the list
+}

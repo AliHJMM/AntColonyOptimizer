@@ -68,5 +68,23 @@ func ReadAndParseFile(inputPath string, colony *Farm) (bool, string) {
 		firstline = true
 		continue
 	}
+	  // Handle start room definition
+	  if isBeginningRoom {
+		isBeginningRoom = false
+		parameters := strings.Fields(line)
+		if len(parameters) != 3 {
+			fmt.Printf("ERROR: invalid data format, invalid room definition (%s)\n", line)
+			os.Exit(1)
+		}
+		room := parameters[0]
+		xCoordinate, err1 := strconv.Atoi(parameters[1])
+		yCoordinate, err2 := strconv.Atoi(parameters[2])
+		if err1 != nil || err2 != nil {
+			fmt.Printf("ERROR: invalid data format, invalid room definition (%s)\n", line)
+			os.Exit(1)
+		}
+		colony.RegisterRoom(room, "start", xCoordinate, yCoordinate)
+		continue
+	}
  }
 }

@@ -38,3 +38,8 @@ type RoomStack struct {
 	roomList []*AntRoom
 }
 
+// AddRoomToStack adds a room to the top of the stack
+func (stack *RoomStack) AddRoomToStack(room *AntRoom) {
+	stack.roomList = append(stack.roomList, room)
+}
+

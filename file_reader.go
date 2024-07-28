@@ -112,5 +112,15 @@ func ReadAndParseFile(inputPath string, colony *Farm) (bool, string) {
 		}
 		continue
 	}
+	// Handle normal room definitions
+	roomDetails := strings.Fields(line)
+	if len(roomDetails) != 3 && (!isBeginningRoom || !isFinalRoom) {
+		continue
+	}
+	room := roomDetails[0]
+	xCoordinate, _ := strconv.Atoi(roomDetails[1])
+	yCoordinate, _ := strconv.Atoi(roomDetails[2])
+	colony.RegisterRoom(room, "normal", xCoordinate, yCoordinate)
+}
  }
 }

@@ -53,5 +53,20 @@ func ReadAndParseFile(inputPath string, colony *Farm) (bool, string) {
 			continue
 		}
 	}
+	 // Parse the first line (number of ants)
+	 if !firstline {
+		roomFields := strings.Fields(line)
+		if len(roomFields) != 1 {
+			fmt.Printf("⛔Invalid data format detected⛔ (%s)\n", line)
+			os.Exit(1)
+		}
+		AntsCount, err = strconv.Atoi(roomFields[0])
+		if err != nil || AntsCount <= 0 {
+			fmt.Printf("ERROR: invalid data format, invalid number of ants (%s)\n", line)
+			os.Exit(1)
+		}
+		firstline = true
+		continue
+	}
  }
 }

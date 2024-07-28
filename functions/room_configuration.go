@@ -24,3 +24,16 @@ func (colony *Farm) RegisterRoom(roomName string, roomType string, xCoord int, y
 			accessibility:  make(map[string]bool),
 		}
 		colony.initialRoom = colony.roomMap[roomName]
+
+	case "end":
+		colony.roomMap[roomName] = &AntRoom{
+			roomName:       roomName,
+			isBeginning:    false,
+			isDestination:  true,
+			isUnoccupied:   true,
+			xCoordinate:    xCoord,
+			yCoordinate:    yCoord,
+			connectedRooms: &RoomCollection{},
+			accessibility:  make(map[string]bool),
+		}
+		colony.finalRoom = colony.roomMap[roomName]

@@ -66,3 +66,18 @@ func (colony *Farm) linkRooms(fromRoomName string, toRoomName string, isBidirect
         fmt.Println("ERROR: invalid data format, invalid room definition")
         return false
     }
+	 // Check for duplicate connection
+	 if fromRoom.HasTunnelTo(toRoom) {
+        fmt.Printf("ERROR: duplicate connection between rooms '%s' and '%s'\n", fromRoomName, toRoomName)
+        return false
+    }
+
+    // Add the connection if no errors were found
+    if isBidirectional {
+        fromRoom.connectedRooms.AddRoom(toRoom)
+        toRoom.connectedRooms.AddRoom(fromRoom)
+    } else {
+        fromRoom.connectedRooms.AddRoom(toRoom)
+    }
+    return true
+}

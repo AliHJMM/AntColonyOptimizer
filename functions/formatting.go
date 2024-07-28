@@ -4,3 +4,7 @@ import (
 	"fmt"
 	"sort"
 )
+
+func (colony *Farm) FormatAntLocations() string {
+
+}

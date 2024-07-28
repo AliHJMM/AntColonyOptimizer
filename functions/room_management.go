@@ -27,3 +27,8 @@ type Connection struct {
 	data           *AntRoom    // The room this connection leads to
 	nextConnection *Connection // The next connection in the list
 }
+
+// RoomCollection is a linked list of connected rooms
+type RoomCollection struct {
+	firstNode *Connection // The first room in the collection
+}

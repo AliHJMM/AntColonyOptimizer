@@ -27,8 +27,8 @@ func (farm *Farm) FindShortestPath() {
     farm.roomPaths[current] = 1
     seenRooms[current] = true
 
-	 // Breadth-first search
-	 for current != nil {
+    // Breadth-first search
+    for current != nil {
         neighborNode := current.connectedRooms.firstNode
         for neighborNode != nil {
             if !seenRooms[neighborNode.data] {
@@ -48,8 +48,9 @@ func (farm *Farm) FindShortestPath() {
         exploredRooms[current] = true
         current = stack.RemoveRoom()
     }
-	  // Check if initial room was explored
-	  if !exploredRooms[farm.initialRoom] {
+    
+    // Check if initial room was explored
+    if !exploredRooms[farm.initialRoom] {
         printAndExit("⛔ Initial Room Not Explored⛔", 0)
     }
 }
@@ -74,7 +75,7 @@ func (colony *Farm) AdvanceAntsInFarm(toggle bool) {
         return colony.CountTunnels(activeWorkers[workerIdx1].currentRoom) < colony.CountTunnels(activeWorkers[workerIdx2].currentRoom)
     })
 
-	for workerIndex := 0; workerIndex < len(activeWorkers); workerIndex++ {
+    for workerIndex := 0; workerIndex < len(activeWorkers); workerIndex++ {
         nextPath := colony.DetermineNextRoom(activeWorkers[workerIndex], toggle)
 
         if nextPath != colony.finalRoom || activeWorkers[workerIndex].currentRoom.isBeginning {
@@ -93,13 +94,14 @@ func (colony *Farm) AdvanceAntsInFarm(toggle bool) {
             activeWorkers[workerIndex].hasCompletedMove = true
             movementOccurred = true
         }
-		 // Reset worker index if movement occurred and we're at the last worker
-		 if workerIndex == len(activeWorkers)-1 && movementOccurred {
+
+        // Reset worker index if movement occurred and we're at the last worker
+        if workerIndex == len(activeWorkers)-1 && movementOccurred {
             workerIndex = 0
             movementOccurred = false
         }
     }
-	colony.ResetTunnelAccess()
+    colony.ResetTunnelAccess()
     colony.FindShortestPath()
 }
 
@@ -113,28 +115,30 @@ func (colony *Farm) FindOptimalAntPath() {
         colony.AdvanceAntsInFarm(false)
         offPath += colony.FormatAntLocations()
     }
-	 // Second attempt with optimization
-	 colony.RepositionAnts()
-	 for !colony.AreAllAntsAtFinalRoom() {
-		 currentStep++
-		 onSteps++
-		 if onSteps > offSteps {
-			 break
-		 }
-		 colony.AdvanceAntsInFarm(true)
-		 onPath += colony.FormatAntLocations()
-	 }
- 
-	 // Compare results and print the optimal path
-	 if offSteps == onSteps {
-		 fmt.Printf("\n%s\nSteps taken: %d\n", onPath, onSteps)
-	 } else if offSteps < onSteps {
-		 fmt.Printf("\n%s\nSteps taken: %d\n", offPath, offSteps)
-	 } else {
-		 fmt.Printf("\n%s\nSteps taken: %d\n", onPath, onSteps)
-	 }
- }
- // DetermineNextRoom finds the best next room for an ant to move to
+
+    // Second attempt with optimization
+    colony.RepositionAnts()
+    for !colony.AreAllAntsAtFinalRoom() {
+        currentStep++
+        onSteps++
+        if onSteps > offSteps {
+            break
+        }
+        colony.AdvanceAntsInFarm(true)
+        onPath += colony.FormatAntLocations()
+    }
+
+    // Compare results and print the optimal path
+    if offSteps == onSteps {
+        fmt.Printf("\n%s\nSteps taken: %d\n", onPath, onSteps)
+    } else if offSteps < onSteps {
+        fmt.Printf("\n%s\nSteps taken: %d\n", offPath, offSteps)
+    } else {
+        fmt.Printf("\n%s\nSteps taken: %d\n", onPath, onSteps)
+    }
+}
+
+// DetermineNextRoom finds the best next room for an ant to move to
 func (colony *Farm) DetermineNextRoom(ant *ColonyWorker, isStrict bool) *AntRoom {
     shortestPath := math.MaxInt32
     bestRoom := ant.currentRoom.connectedRooms.firstNode.data
@@ -156,6 +160,7 @@ func (colony *Farm) DetermineNextRoom(ant *ColonyWorker, isStrict bool) *AntRoom
     }
     return bestRoom
 }
+
 // canMoveToRoom checks if an ant can move to a specific room
 func canMoveToRoom(ant *ColonyWorker, destinationRoom *AntRoom) bool {
     return (destinationRoom.isUnoccupied || destinationRoom.isDestination) &&

@@ -17,4 +17,12 @@ func ReadAndParseFile(inputPath string, colony *Farm) (bool, string) {
 	 os.Exit(1)
  }
  defer inputFile.Close()
+ inputInfo := ""
+ lineIndex := 0
+ fileScanner := bufio.NewScanner(inputFile)
+ isBeginningRoom := false
+ isFinalRoom := false
+ AntsCount := 0
+ startRoomSet := false
+ endRoomSet := false
 }

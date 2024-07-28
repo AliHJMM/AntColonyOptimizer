@@ -55,3 +55,14 @@ func (colony *Farm) RegisterRoom(roomName string, roomType string, xCoord int, y
 		os.Exit(1) // Exit the program with an error code
 	}
 }
+
+// linkRooms links two rooms and handles invalid room names and duplicate connections.
+func (colony *Farm) linkRooms(fromRoomName string, toRoomName string, isBidirectional bool) bool {
+    fromRoom := colony.roomMap[fromRoomName]
+    toRoom := colony.roomMap[toRoomName]
+
+    if fromRoom == nil || toRoom == nil {
+        // This checks if either of the rooms does not exist and prints an appropriate error message
+        fmt.Println("ERROR: invalid data format, invalid room definition")
+        return false
+    }

@@ -56,3 +56,10 @@ func (colony *Farm) SetupPaths() {
 			colony.roomPaths[colony.roomMap[index]] = math.MaxInt32
 	}
 }
+
+// Setup initializes the basic structures of the Farm
+func (colony *Farm) Setup() {
+	colony.roomMap = make(map[string]*AntRoom)
+	colony.roomPaths = make(map[*AntRoom]int)
+}
+

@@ -33,3 +33,19 @@ type Farm struct {
 	initialRoom *AntRoom            // Starting room for the ants
 	finalRoom   *AntRoom            // Destination room for the ants
 }
+
+// SetupAnts initializes the ants in the colony
+func (colony *Farm) SetupAnts(antCount int) {
+	colony.antCount = antCount
+	colony.workers = make([]*ColonyWorker, colony.antCount)
+
+	// Initialize each ant
+	for i := 0; i < antCount; i++ {
+			colony.workers[i] = new(ColonyWorker)
+			colony.workers[i].currentRoom = colony.initialRoom
+			colony.workers[i].visitedRoom = make(map[*AntRoom]bool)
+			colony.workers[i].visitedRoom[colony.initialRoom] = false
+			colony.workers[i].inMotion = true
+			colony.workers[i].antNumber = i + 1
+	}
+}

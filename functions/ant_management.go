@@ -43,3 +43,13 @@ func (stack *RoomStack) AddRoomToStack(room *AntRoom) {
 	stack.roomList = append(stack.roomList, room)
 }
 
+// RemoveRoom removes and returns the top room from the stack
+func (stack *RoomStack) RemoveRoom() *AntRoom {
+	if len(stack.roomList) == 0 {
+			return nil // Return nil if stack is empty
+	}
+	removedRoom := stack.roomList[0]
+	stack.roomList = stack.roomList[1:] // Update stack by removing first element
+	return removedRoom
+}
+

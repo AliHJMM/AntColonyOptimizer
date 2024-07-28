@@ -19,3 +19,17 @@ func (colony *Farm) RepositionAnts() {
 	colony.ResetTunnelAccess()
 }
 
+func (colony *Farm) ResetTunnelAccess() {
+	roomCollection := colony.roomMap
+
+	// Iterate through all rooms in the colony
+	for roomKey := range roomCollection {
+			currentRoom := roomCollection[roomKey]
+
+			// Set all tunnel accessibility to false for each room
+			for tunnelID := range currentRoom.accessibility {
+					currentRoom.accessibility[tunnelID] = false
+			}
+	}
+}
+

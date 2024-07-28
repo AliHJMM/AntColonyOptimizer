@@ -122,5 +122,15 @@ func ReadAndParseFile(inputPath string, colony *Farm) (bool, string) {
 	yCoordinate, _ := strconv.Atoi(roomDetails[2])
 	colony.RegisterRoom(room, "normal", xCoordinate, yCoordinate)
 }
+ // Final checks
+ if AntsCount == 0 {
+	fmt.Printf("⛔Data format issue - No ants specified!⛔ (%s)\n")
+	os.Exit(1)
+}
+
+if !startRoomSet || !endRoomSet {
+	fmt.Println("ERROR: invalid data format, no start/end room found")
+	os.Exit(1)
+}
  }
 }

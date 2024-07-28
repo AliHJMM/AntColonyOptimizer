@@ -19,3 +19,22 @@ func (colony Farm) CheckDistinctRoomCoordinates() bool {
 	// All rooms have distinct coordinates
 	return true
 }
+
+// HasTunnelTo checks if there's a direct connection to the target room
+func (currentChamber *AntRoom) HasTunnelTo(targetChamber *AntRoom) bool {
+	// Start with the first connected room
+	connection := currentChamber.connectedRooms.firstNode
+	
+	// Iterate through all connected rooms
+	for connection != nil {
+			// If the connected room matches the target room, a tunnel exists
+			if connection.data.roomName == targetChamber.roomName {
+					return true
+			}
+			// Move to the next connection
+			connection = connection.nextConnection
+	}
+	// No tunnel found to the target room
+	return false
+}
+

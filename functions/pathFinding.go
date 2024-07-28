@@ -73,3 +73,23 @@ func (colony *Farm) AdvanceAntsInFarm(toggle bool) {
     sort.SliceStable(activeWorkers, func(workerIdx1, workerIdx2 int) bool {
         return colony.CountTunnels(activeWorkers[workerIdx1].currentRoom) < colony.CountTunnels(activeWorkers[workerIdx2].currentRoom)
     })
+
+	for workerIndex := 0; workerIndex < len(activeWorkers); workerIndex++ {
+        nextPath := colony.DetermineNextRoom(activeWorkers[workerIndex], toggle)
+
+        if nextPath != colony.finalRoom || activeWorkers[workerIndex].currentRoom.isBeginning {
+            colony.roomPaths[nextPath]++
+        }
+        if canMoveToRoom(activeWorkers[workerIndex], nextPath) {
+            // Move the ant to the next room
+            activeWorkers[workerIndex].currentRoom.accessibility[nextPath.roomName] = true
+            activeWorkers[workerIndex].visitedRoom[activeWorkers[workerIndex].currentRoom] = true
+            activeWorkers[workerIndex].currentRoom.isUnoccupied = true
+            activeWorkers[workerIndex].currentRoom = nextPath
+            nextPath.isUnoccupied = false
+            if activeWorkers[workerIndex].currentRoom.isDestination {
+                activeWorkers[workerIndex].inMotion = false
+            }
+            activeWorkers[workerIndex].hasCompletedMove = true
+            movementOccurred = true
+        }

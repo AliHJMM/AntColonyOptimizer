@@ -37,3 +37,21 @@ func (colony *Farm) RegisterRoom(roomName string, roomType string, xCoord int, y
 			accessibility:  make(map[string]bool),
 		}
 		colony.finalRoom = colony.roomMap[roomName]
+
+	case "normal":
+		colony.roomMap[roomName] = &AntRoom{
+			roomName:       roomName,
+			isBeginning:    false,
+			isDestination:  false,
+			isUnoccupied:   true,
+			xCoordinate:    xCoord,
+			yCoordinate:    yCoord,
+			connectedRooms: &RoomCollection{},
+			accessibility:  make(map[string]bool),
+		}
+
+	default:
+		fmt.Printf("ERROR: invalid data format, invalid room type '%s'\n", roomType)
+		os.Exit(1) // Exit the program with an error code
+	}
+}

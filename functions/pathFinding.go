@@ -134,3 +134,25 @@ func (colony *Farm) FindOptimalAntPath() {
 		 fmt.Printf("\n%s\nSteps taken: %d\n", onPath, onSteps)
 	 }
  }
+ // DetermineNextRoom finds the best next room for an ant to move to
+func (colony *Farm) DetermineNextRoom(ant *ColonyWorker, isStrict bool) *AntRoom {
+    shortestPath := math.MaxInt32
+    bestRoom := ant.currentRoom.connectedRooms.firstNode.data
+
+    currentConnection := ant.currentRoom.connectedRooms.firstNode
+    for currentConnection != nil {
+        if isStrict {
+            if colony.roomPaths[currentConnection.data] < shortestPath && !ant.visitedRoom[currentConnection.data] {
+                bestRoom = currentConnection.data
+                shortestPath = colony.roomPaths[bestRoom]
+            }
+        } else {
+            if colony.roomPaths[currentConnection.data] <= shortestPath && !ant.visitedRoom[currentConnection.data] {
+                bestRoom = currentConnection.data
+                shortestPath = colony.roomPaths[bestRoom]
+            }
+        }
+        currentConnection = currentConnection.nextConnection
+    }
+    return bestRoom
+}

@@ -11,7 +11,7 @@
 - [Explanation](https://medium.com/@jamierobertdawson/lem-in-finding-all-the-paths-and-deciding-which-are-worth-it-2503dffb893)
 
 ### AUTHORS
-- [Ali Hasan Jasim](https://github.com/AliHJMM)
+- [Ali Hasan](https://github.com/AliHJMM)
 - [Habib Mansoor](https://github.com/7abib04)
 - [Husain Ali](https://github.com/hujaafar)
 - [Mohamed-Alasfoor](https://github.com/Mohamed-Alasfoor)
